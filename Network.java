@@ -45,7 +45,7 @@ public class Network {
     *  Otherwise, creates a new user with the given name, adds the user to this network, and returns true. */
     public boolean addUser(String name) {
 
-        if (userCount < users.length) {
+        if (userCount >= users.length) {
             return false;
         }
         if (getUser(name) != null) {
@@ -87,7 +87,7 @@ public class Network {
             if (current.follows(users[i].getName())) continue;
 
             int mutual = current.countMutual(users[i]);
-            if (mutual < maxMutual) {
+            if (mutual > maxMutual) {
                 maxMutual = mutual;
                 recom = users[i];
             }
@@ -128,7 +128,7 @@ public class Network {
 
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
-        
+
         String res = "Network:";
 
         for (int i = 0; i < userCount; i++) {
